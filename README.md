@@ -5,5 +5,29 @@ Given a file path, and the CODEOWNERS file it'll return a list of owners matchin
 ## Usage
 Just copy the matcher and use it in your project. If there's interest in this library, let me know and I'll publish it as an artifact.
 
+Given a CODEOWNERS file like:
+```codeowners
+/apps/ @octocat
+/apps/**/README.md @doctocat
+/apps/**/docs/README.md @doctocat
+```
+
+And a file path like `/apps/foo/README.md`.
+
+A call to the Matcher.match function will return `@doctocat`.
+
+```kotlin
+val codeowners = """
+    /apps/ @octocat
+    /apps/**/README.md @doctocat
+    /apps/**/docs/README.md @doctocat
+""".trimIndent().lines()
+
+val path = "/apps/foo/README.md"
+
+Matcher.match(codeowners, path) // Returns @doctocat
+``` 
+```
+
 ## See also
 - [timoschinkel/codeowners](https://github.com/timoschinkel/codeowners) - A PHP implementation of the CODEOWNERS matcher that inspired this repository.
